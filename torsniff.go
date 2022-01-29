@@ -16,7 +16,6 @@ import (
 	"github.com/marksamman/bencode"
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
-	"go.etcd.io/etcd/pkg/fileutil"
 )
 
 const (
@@ -192,28 +191,28 @@ func (t *torsniff) isTorrentExist(infohashHex string) bool {
 }
 
 func (t *torsniff) saveTorrent(infohashHex string, data []byte) error {
-	name, dir := t.torrentPath(infohashHex)
-	if err := os.MkdirAll(dir, 0755); err != nil {
-		return err
-	}
+	// _, dir := t.torrentPath(infohashHex)
+	// if err := os.MkdirAll(dir, 0755); err != nil {
+	// 	return err
+	// }
 
-	d, err := bencode.Decode(bytes.NewBuffer(data))
-	if err != nil {
-		return err
-	}
+	// d, err := bencode.Decode(bytes.NewBuffer(data))
+	// if err != nil {
+	// 	return err
+	// }
 
-	f, err := fileutil.TryLockFile(name, os.O_WRONLY|os.O_CREATE, 0755)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
+	// f, err := fileutil.TryLockFile(name, os.O_WRONLY|os.O_CREATE, 0755)
+	// if err != nil {
+	// 	return err
+	// }
+	// defer f.Close()
 
-	_, err = f.Write(bencode.Encode(map[string]interface{}{
-		"info": d,
-	}))
-	if err != nil {
-		return err
-	}
+	// _, err = f.Write(bencode.Encode(map[string]interface{}{
+	// 	"info": d,
+	// }))
+	// if err != nil {
+	// 	return err
+	// }
 
 	return nil
 }

@@ -17,3 +17,5 @@ torsniff
 releases
 .DS_Store
 bin
+
+vendor/
